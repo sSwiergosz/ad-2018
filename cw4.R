@@ -43,3 +43,20 @@ ggplot(data.city, aes(x=data.city$x, y=data.city$y)) + geom_point() +
 model.lm <- lm(y ~ x, data = data.city)
 summary(model.lm)
 predict(model.lm, newdata = data.frame(x = 2), se = TRUE)$fit # Prediction
+
+#zad5
+install.packages("plotly")
+library(plotly)
+library(UsingR)
+
+ggplot(florida, aes(x=BUSH, y=BUCHANAN)) + 
+  geom_point()
+ggplotly()
+
+# remove outliers
+florida <- florida[florida$BUSH != 152846 & florida$BUCHANAN != 3407, ]
+florida <- florida[florida$BUSH != 289456 & florida$BUCHANAN != 561, ]
+
+model.lm <- lm(BUCHANAN ~ BUSH, data = florida)
+summary(model.lm)
+predict(model.lm, newdata = data.frame(BUSH = 289456)) # Prediction

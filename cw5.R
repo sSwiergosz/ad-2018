@@ -25,6 +25,14 @@ test.nlsResiduals(nlsResiduals(pop.ss))
 
 #zad 3 podobnie
 
+library(drc)
+library(ggplot2)
+heartrate.lr <- nls(pressure ~ SSlogis(rate , a , b , c), data = heartrate)
+broom::tidy(heartrate.lr)
+
+ggplot(heartrate,aes( x =  rate, y = pressure)) +
+  geom_point() +
+  stat_function(fun = function(x) coef(heartrate.lr)[1]/( 1 + exp((coef(heartrate.lr)[2] - x)/ coef(heartrate.lr)[3])), col = 'red')
 
 #zad 4
 

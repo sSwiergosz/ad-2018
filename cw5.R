@@ -34,19 +34,35 @@ ggplot(heartrate,aes( x =  rate, y = pressure)) +
   geom_point() +
   stat_function(fun = function(x) coef(heartrate.lr)[1]/( 1 + exp((coef(heartrate.lr)[2] - x)/ coef(heartrate.lr)[3])), col = 'red')
 
+plot(nlsResiduals(heartrate.lr))
+test.nlsResiduals(nlsResiduals(heartrate.lr))
+
 #zad 4
 
-v <- c(0,10, 16.3, 23, 27.5, 31, 35.6, 39, 41.5, 42.9, 45, 46,
+v <- c(10, 16.3, 23, 27.5, 31, 35.6, 39, 41.5, 42.9, 45, 46,
        45.5, 46, 49, 50)
-t <- c(0:length(v))
+t <- c(1:(length(v)))
+
+length(v)
+t
+
 
 v_name <- "speed"
 y_name <- "time"
 
 require(reshape2)
-df <- melt(data.frame(v,t))
+df <- data.frame(v,t)
 colnames(df) <- c(v_name,y_name)
 print(df)
+
+df.md = nls(speed ~ SSlogis(time, a, b, c), data = df)
+broom::tidy(df.md)
+
+ggplot(df, aes(time, speed)) + 
+  geom_point() +
+  stat_function(fun = function(x) coef(df.md)[1]/( 1 + exp((coef(df.md)[2] - x)/ coef(df.md)[3])), col = 'red')
+
+
 
 ggplot(data.frame(v) , aes(x = v , y = t)) +
   geom_point() + 

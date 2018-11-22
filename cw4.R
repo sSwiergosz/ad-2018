@@ -60,3 +60,21 @@ florida <- florida[florida$BUSH != 289456 & florida$BUCHANAN != 561, ]
 model.lm <- lm(BUCHANAN ~ BUSH, data = florida)
 summary(model.lm)
 predict(model.lm, newdata = data.frame(BUSH = 289456)) # Prediction
+
+#zad6
+library(UsingR)
+library(plotly)
+
+# remove outlier
+emissions.without.outlier <- emissions[emissions$CO2 != 6750 & emissions$GDP != 8083000, ]
+
+ggplot() + 
+  geom_smooth(data=emissions, aes(x=GDP, y=CO2), method = "lm", se=FALSE, color="blue", formula = y ~ x^2) +
+  geom_smooth(data=emissions.without.outlier, aes(x=GDP, y=CO2), method = "lm", se=FALSE, color="red", formula = y ~ x^2)+
+  geom_point(data=emissions, aes(x=GDP, y=CO2))
+ggplotly()
+
+model <- lm(CO2 ~ GDP, data = emissions)
+model.without.outlier <- lm(CO2 ~ GDP, data = emissions.without.outlier)
+summary(model)
+summary(model.without.outlier)

@@ -60,10 +60,11 @@ df.md = nls(speed ~ SSmicmen(time, a, b), data = df)
 
 data.frame(time = 18)
 
-predict(df.md, new_data = data.frame(time = 500))
+predict(df.md, new_data = data.frame(time = 18))
 
 ggplot(df, aes( x = df$time, y =speed)) + 
   geom_point() +
+  geom_point(aes(18, (coef(df.md)[1] * 18)/((coef(df.md)[2] + 18))) , col = 'blue') +
   stat_function(fun = function(x) (coef(df.md)[1] * x)/((coef(df.md)[2] + x)), col = 'red')
 coef(df.md)[2]
 

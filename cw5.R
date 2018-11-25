@@ -55,15 +55,16 @@ df <- data.frame(v,t)
 colnames(df) <- c(v_name,y_name)
 print(df)
 
-df.md = nls(speed ~ SSlogis(time, a, b, c), data = df)
-broom::tidy(df.md)
+df.md = nls(speed ~ SSmicmen(time, a, b), data = df)
+#broom::tidy(df.md)
 
-ggplot(df, aes(time, speed)) + 
+data.frame(time = 18)
+
+predict(df.md, new_data = data.frame(time = 500))
+
+ggplot(df, aes( x = df$time, y =speed)) + 
   geom_point() +
-  stat_function(fun = function(x) coef(df.md)[1]/( 1 + exp((coef(df.md)[2] - x)/ coef(df.md)[3])), col = 'red')
+  stat_function(fun = function(x) (coef(df.md)[1] * x)/((coef(df.md)[2] + x)), col = 'red')
+coef(df.md)[2]
 
 
-
-ggplot(data.frame(v) , aes(x = v , y = t)) +
-  geom_point() + 
-  geom_smooth()

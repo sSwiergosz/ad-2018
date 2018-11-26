@@ -60,12 +60,34 @@ df.md = nls(speed ~ SSmicmen(time, a, b), data = df)
 
 data.frame(time = 18)
 
-predict(df.md, new_data = data.frame(time = 18))
+df.pred = predict(df.md, data.frame(time = 18))
 
 ggplot(df, aes( x = df$time, y =speed)) + 
   geom_point() +
-  geom_point(aes(18, (coef(df.md)[1] * 18)/((coef(df.md)[2] + 18))) , col = 'blue') +
-  stat_function(fun = function(x) (coef(df.md)[1] * x)/((coef(df.md)[2] + x)), col = 'red')
-coef(df.md)[2]
+  geom_point(aes(18, df.pred) , col = 'blue') +
+  stat_function(fun = function(x) (coef(df.md)[1] * x)/((coef(df.md)[2] + x)), col = 'red') +
+  xlim(0,20)
 
+# zad 5
 
+#regresja uogólniona
+moths.model = glm( A ~ log(meters), moths, family = poisson())
+summary(moths.model)
+
+# zad 6
+
+Koncentracja <- c(0.1, 0.5, 1, 10, 20, 30, 50, 70, 80, 100, 150)
+Nie <- c(7, 1, 10, 9, 2, 9, 13, 1, 1, 4, 3)
+Tak <- c(0, 0, 3, 4, 0, 6, 7, 0, 0, 1, 7)
+
+kon <- "Koncentracja"
+y <- "Tak"
+n <- "Nie"
+
+peptideC <- data.frame(Koncentracja,Nie,Tak)
+colnames(peptideC) <- c(kon,n,y)
+peptideC$probY <- with(peptideC, Tak / (Nie + Tak))
+peptideC$w <- with(peptideC, Tak + Nie)
+peptideC$probY
+peptideC.model <- glm( probY ~ log(Koncentracja), peptideC, family = "binomial", weights = w)
+summary(peptideC.model)

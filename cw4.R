@@ -78,3 +78,15 @@ model <- lm(CO2 ~ GDP, data = emissions)
 model.without.outlier <- lm(CO2 ~ GDP, data = emissions.without.outlier)
 summary(model)
 summary(model.without.outlier)
+
+#zad7
+library(UsingR)
+model.with.bias <- lm(sale ~ ., homeprice)
+model.without.bias <- lm(sale ~ . - 1, homeprice) # -1 ¿eby usun¹c wyraz wolny
+
+summary(model.with.bias)
+summary(model.without.bias)
+
+# half nie ma wp³ywu, poniew¿ ma wysok¹ pwartoœc Pr(>|t|)
+# im mniej tym bardziej istotna np list jest istotna bo ma wysokie pr
+# usuniecie wyrazu wolnego spowodowa³o niewielki wp³yw, nie ma sensu usuwaæ

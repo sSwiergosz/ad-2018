@@ -55,13 +55,37 @@ ggsurvplot(rats.model,
 #data.frame(result=c(rep("yes", times=length(yesFiles)), rep("no", times=length(noFiles))), name=c(yesFiles, noFiles))
 
 #Zad 2
+
+library("MASS")
+
 complete.cases(cancer)
 str(cancer)
 cancer.without.nas <- cancer[complete.cases(cancer),]
 str(cancer.without.nas)
 complete.cases(cancer.without.nas)
 
-cancer.without.nas
+cancer.without.nas$cens <- Surv(cancer.without.nas$time, cancer.without.nas$status)
+
+cancer.model <- survfit(formula = cens ~ sex, data = cancer.without.nas)
+
+ggsurvplot(cancer.model, 
+           data = cancer.without.nas,
+           risk.table = TRUE,       
+           pval = TRUE, 
+           conf.int = TRUE,
+           fun = 'pct',
+           legend.labs = c('Male', 
+                           'Female'),
+           legend.title = 'Sex')
+
+cancer.time.sex.surfdiff <- survdiff(formula = cens ~ sex, data = cancer.without.nas)
+cancer.time.sex.surfdiff
+
+stepAIC(cancer.model) 
+
+cox <- coxph(formula = cens ~ sex + age + meal.cal, data = cancer.without.nas)
+cox
 
 
-
+cox2 <- cox <- coxph(formula = cens ~ sex + age, data = cancer.without.nas)
+cox2

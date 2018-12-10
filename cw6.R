@@ -81,11 +81,13 @@ ggsurvplot(cancer.model,
 cancer.time.sex.surfdiff <- survdiff(formula = cens ~ sex, data = cancer.without.nas)
 cancer.time.sex.surfdiff
 
-stepAIC(cancer.model) 
+
 
 cox <- coxph(formula = cens ~ sex + age + meal.cal, data = cancer.without.nas)
 cox
 
+stepAIC(cox) 
 
-cox2 <- cox <- coxph(formula = cens ~ sex + age, data = cancer.without.nas)
+
+cox2 <- coxph(formula = cens ~ sex + age, data = cancer.without.nas)
 cox2

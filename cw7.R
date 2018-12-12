@@ -109,3 +109,7 @@ data(gold)
 
 gold.ts <- ts(data=gold)
 ts.plot(gold.ts)
+
+# Differences in logs
+log.diff <- diff(log(gold.ts))
+ts.plot(log.diff)

@@ -87,7 +87,7 @@ library(TSA)
 library(forecast)
 
 data(robot)
-robot.ts <- Female <- ts(data=robot)
+robot.ts <- ts(data=robot)
 ts.plot(robot.ts)
 
 auto.ar <- arima(x=robot.ts, order = c(1, 0, 0))
@@ -101,3 +101,11 @@ AIC(auto.ar, auto.arima)
 
 prediction <- predict(auto.arima, n.ahead=5)
 prediction
+
+# Zadanie 8
+install.packages("TSA")
+library(TSA)
+data(gold)
+
+gold.ts <- ts(data=gold)
+ts.plot(gold.ts)

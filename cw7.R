@@ -56,7 +56,7 @@ shapiro.test(model.q.stdres)
 #install.packages("forecast")
 library(forecast)
 par(mfrow = c(1,1))
-my_data <- read.delim("female.txt")
+my_data <- read.delim("female.txt", header=FALSE)
 Female <- ts(data=my_data, start = c(1961, 7), frequency = 12)
 ts.plot(Female)
 
@@ -68,7 +68,7 @@ auto.model <- auto.arima(Female)
 summary(auto.model)
 
 # Zad4 
-unemp_data <- read.delim("unemp.txt")
+unemp_data <- read.delim("unemp.txt", header=FALSE)
 unemp <- ts(data=unemp_data, start = c(1975, 7), frequency = 12)
 plot(unemp)
 lines(ma(unemp, order=12), col="red")

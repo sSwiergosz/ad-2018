@@ -63,7 +63,6 @@ ts.plot(Female)
 # Średnia ruchoma rzędu 17
 lines(ma(Female, order=17), col="red")
 
-#ARIMA - małe odstępstwo w wynikach końcowych - trzeba się przyjrzeć
 auto.model <- auto.arima(Female)
 summary(auto.model)
 
@@ -74,7 +73,6 @@ plot(unemp)
 lines(ma(unemp, order=12), col="red")
 lines(HoltWinters(unemp, beta=FALSE)$fitted[,1], col = "blue")
 
-#ARIMA - małe odstępstwo w wynikach końcowych - trzeba się przyjrzeć
 auto.model <- auto.arima(unemp)
 summary(auto.model)
 
@@ -83,3 +81,23 @@ summary(auto.model)
 abs(polyroot(c(1, -3/2, 1/2))) # nie jest stacjonarny - pierwiastki 1 i 2
 abs(polyroot(c(1, -5/6, 1/6))) # jest stacjonarny - pierwiastki 2 i 3
 abs(polyroot(c(1, -2/3, 5/3))) # nie jest stacjonarny - pierwiastki 0.7745967 i 0.7745967
+
+# Zad7
+library(TSA)
+library(forecast)
+
+data(robot)
+robot.ts <- Female <- ts(data=robot)
+ts.plot(robot.ts)
+
+auto.ar <- arima(x=robot.ts, order = c(1, 0, 0))
+auto.arima <- arima(x=robot.ts, order = c(0, 1, 1))
+summary(auto.ar)
+summary(auto.arima)
+
+AIC(auto.ar, auto.arima)
+# Należy wybrać auto.arima, ponieważ najlepszym modelem jest ten, dla którego wartość
+# kryterium informacyjnego (AIC) jest najniższa
+
+prediction <- predict(auto.arima, n.ahead=5)
+prediction

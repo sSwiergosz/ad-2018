@@ -95,5 +95,17 @@ grid.arrange(p1,
 
 #ZNACZY SIE ZA TYDZIEN BEDZIEMY ROBIC NIE NA ZA TYDZIEN OJ NIE NIE
 
+#ZADANIE CZWARTE JESZCZE BYŁO
 
+#4
+
+data.set <-factoextra::housetasks
+model.ca <-ca::ca(data.set)
+model.ca$rowcoord %>% 
+  as_tibble() %>% 
+  ggplot(aes(x = Dim1, y= Dim2, label = rownames(data.set))) +
+  geom_text(col='red') +
+  geom_text( data = as_tibble(model.ca$colcoord),
+             aes(label =colnames(data.set)),
+             col ='blue')
 

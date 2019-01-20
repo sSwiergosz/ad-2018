@@ -1,14 +1,14 @@
 library(PogromcyDanych)
 setLang("eng")
 library(ggplot2)
-library(gridExtra)
+library(gridExtra) #biblioteka do dwoch wykresow na jednym
 
 #Zad1
 cars %>% 
-  ggplot(aes(x = speed, y = dist)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se=FALSE, formula = y ~ x^2) + 
-  geom_smooth(method = "lm", se=FALSE, formula = y ~ x + I(x^2), color = "red")
+  ggplot(aes(x = speed, y = dist)) + # wykres speed od dist
+  geom_point() +  # punkciki
+  geom_smooth(method = "lm", se=FALSE, formula = y ~ x^2) +  #prosta regresji
+  geom_smooth(method = "lm", se=FALSE, formula = y ~ x + I(x^2), color = "red") #kwadratowa
 
 #zad2
 library(MASS)
@@ -18,7 +18,7 @@ p1 = hills %>%
 p2 = hills %>% 
   ggplot(aes(x = time , y = climb)) + geom_point() + geom_smooth(method = "lm",se=FALSE, formula = y ~ x^2)
 
-grid.arrange(p1,p2)
+grid.arrange(p1,p2)# dwa wykresy na jednym
 
 #zad3
 install.packages("UsingR", dependencies=TRUE)
@@ -82,11 +82,11 @@ summary(model.without.outlier)
 #zad7
 library(UsingR)
 model.with.bias <- lm(sale ~ ., homeprice)
-model.without.bias <- lm(sale ~ . - 1, homeprice) # -1 ¿eby usun¹c wyraz wolny
+model.without.bias <- lm(sale ~ . - 1, homeprice) # -1 ?eby usun?c wyraz wolny
 
 summary(model.with.bias)
 summary(model.without.bias)
 
-# half nie ma wp³ywu, poniew¿ ma wysok¹ pwartoœc Pr(>|t|)
+# half nie ma wp?ywu, poniew? ma wysok? pwarto?c Pr(>|t|)
 # im mniej tym bardziej istotna np list jest istotna bo ma wysokie pr
-# usuniecie wyrazu wolnego spowodowa³o niewielki wp³yw, nie ma sensu usuwaæ
+# usuniecie wyrazu wolnego spowodowa?o niewielki wp?yw, nie ma sensu usuwa?

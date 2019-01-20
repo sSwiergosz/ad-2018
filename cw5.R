@@ -13,7 +13,7 @@ vif(litters.lm) #liczymy rozdÄ™cie
 
 library(carData)
 
-pop.ss <- nls(population ~ SSlogis(year, a, b, c), data=USPop)
+pop.ss <- nls(population ~ SSlogis(year, a, b, c), data=USPop)# te abc sie dodaje takse
 summary(pop.ss)
 broom::tidy(pop.ss)
 ggplot(USPop,aes( x =  year, y = population)) +
@@ -70,7 +70,7 @@ ggplot(df, aes( x = df$time, y =speed)) +
 
 # zad 5
 
-#regresja uogólniona
+#regresja uog?lniona
 moths.model = glm( A ~ log(meters), moths, family = poisson())
 summary(moths.model)
 

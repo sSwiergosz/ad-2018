@@ -4,13 +4,13 @@ library(magrittr)
 
 # Zadanie 1
 table(sapply(auta2012, class))
-# sapply powoduje zaaplikowanie funkcji class, która determinuje klasę obiektu.
-# table zlicza i wyświetla wynik w sposób przejrzysty
+# sapply powoduje zaaplikowanie funkcji class, kt??ra determinuje klas?? obiektu.
+# table zlicza i wy??wietla wynik w spos??b przejrzysty
 
 # Zadanie 2
-auta2012 %>% # weź dane o autach
-  group_by(Marka) %>% # pogrupuj według Marki
-  summarise(n = n()) %>%  # stwórz nową tabelę, w której będą zliczenia
+auta2012 %>% # we?? dane o autach
+  group_by(Marka) %>% # pogrupuj wed??ug Marki
+  summarise(n = n()) %>%  # stw??rz now?? tabel??, w kt??rej b??d?? zliczenia
   arrange(desc(n)) # posortuj
 
 # Zadanie 3
@@ -86,7 +86,8 @@ auta2012 %>%
 # Zadanie 16
 auta2012 %>%
   filter(Marka == "Volkswagen", Model == "Passat", Rok.produkcji == 2006) %>%
-  summarise(mean.price = mean(Cena.w.PLN), percent = sum(Cena.w.PLN < 35000) / n() * 100)
+  summarise(mean.price = mean(Cena.w.PLN), percent = sum(Cena.w.PLN < 35000) / n() * 100) 
+# sum bo cena < 35000 to bool wiec ma warotsc jeden jak jest spelnione czyli dodajemy jedynki
 
 # Zadanie 17
 auta2012 %>%

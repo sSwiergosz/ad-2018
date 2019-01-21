@@ -86,8 +86,8 @@ n <- "Nie"
 
 peptideC <- data.frame(Koncentracja,Nie,Tak)
 colnames(peptideC) <- c(kon,n,y)
-peptideC$probY <- with(peptideC, Tak / (Nie + Tak))
+peptideC$probY <- with(peptideC, Tak / (Nie + Tak)) #prawdopodbienstwo ze nastapilo zahamowanie
 peptideC$w <- with(peptideC, Tak + Nie)
 peptideC$probY
-peptideC.model <- glm( probY ~ log(Koncentracja), peptideC, family = "binomial", weights = w)
+peptideC.model <- glm( probY ~ log(Koncentracja), peptideC, family = "binomial", weights = w) #binomial bo albo tak albo nie
 summary(peptideC.model)

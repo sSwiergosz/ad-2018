@@ -43,6 +43,7 @@ ggplot(data.city, aes(x=data.city$x, y=data.city$y)) + geom_point() +
 model.lm <- lm(y ~ x, data = data.city)
 summary(model.lm)
 predict(model.lm, newdata = data.frame(x = 2), se = TRUE)$fit # Prediction
+confint(model.lm, level = 0.5)#takie cos jak to zinterpretowac?
 
 #zad5
 install.packages("plotly")
@@ -80,6 +81,7 @@ summary(model)
 summary(model.without.outlier)
 
 #zad7
+install.packages("UsingR")
 library(UsingR)
 model.with.bias <- lm(sale ~ ., homeprice)
 model.without.bias <- lm(sale ~ . - 1, homeprice) # -1 ?eby usun?c wyraz wolny

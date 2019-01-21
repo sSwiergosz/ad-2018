@@ -57,7 +57,7 @@ model.pca <- prcomp(data.set[, 1:4])
 plot(model.pca)
 summary(model.pca)
 #pierwsz dwie wyjasniaja 84% wiec mozna by sie do nich ogranbiczyc
-#3 pierwsze najlepsze wyjasniaja az 93 %
+#3 pierwsze najlepsze wyjasniaja az 93 % summary cumulative orioirtion
 cbind(data.frame(model.pca$x), School = data.set$School) %>% 
   as_tibble() %>% 
   ggplot(aes(x = PC1, y = PC2, col = School, label = rownames(.))) + 

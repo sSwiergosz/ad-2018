@@ -60,7 +60,7 @@ library("MASS")
 
 complete.cases(cancer)
 str(cancer)
-cancer.without.nas <- cancer[complete.cases(cancer),]
+cancer.without.nas <- cancer[complete.cases(cancer),] #usuwanie wartosci nan
 str(cancer.without.nas)
 complete.cases(cancer.without.nas)
 
